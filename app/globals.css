@@ -318,6 +318,14 @@ body {
   line-height: 1.7;
 }
 
+/* ── 버튼 그룹 ── */
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
 /* ── 실행 버튼 ── */
 .run-btn {
   width: 100%;
@@ -349,6 +357,35 @@ body {
   cursor: not-allowed;
   transform: none;
 }
+
+/* ── 다운로드 버튼 ── */
+.download-btn {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1.5px solid rgba(99, 179, 237, 0.5);
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(49, 130, 206, 0.15), rgba(99, 179, 237, 0.1));
+  color: #63b3ed;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s, border-color 0.2s;
+  font-family: inherit;
+  letter-spacing: 0.01em;
+  flex-shrink: 0;
+}
+.download-btn:hover {
+  background: linear-gradient(135deg, rgba(49, 130, 206, 0.28), rgba(99, 179, 237, 0.2));
+  border-color: #63b3ed;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(99, 179, 237, 0.3);
+}
+.download-btn:active { transform: translateY(0); }
+
 
 /* ────────────────────────────────────────────
    오른쪽 패널 (에디터)

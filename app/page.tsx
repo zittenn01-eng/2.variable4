@@ -268,6 +268,17 @@ export default function PizzaPage() {
     }
   }, [validationErrors]);
 
+  // ── pizza.py 다운로드
+  const handleDownload = useCallback(() => {
+    const blob = new Blob([code], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "pizza.py";
+    a.click();
+    URL.revokeObjectURL(url);
+  }, [code]);
+
   // ── 코드 저장 + Pyodide 실행
   const handleRunOrder = useCallback(async () => {
     if (pyStatus !== "ready" || isRunning) return;
@@ -540,12 +551,17 @@ __captured__ = _stdout.getvalue()
             )}
           </div>
 
-          {/* 실행 버튼 */}
-          <button id="run-btn" className="run-btn" disabled={pyStatus !== "ready" || isRunning} onClick={handleRunOrder}>
-            {isRunning ? <><span className="spin">⚙️</span> 파이썬 실행 중...</>
-              : isSaving ? "💾 저장 중..."
-              : "▶ 코드 저장 및 주문하기 (파이썬 실행)"}
-          </button>
+          {/* 버튼 그룹 */}
+          <div className="btn-group">
+            <button id="run-btn" className="run-btn" disabled={pyStatus !== "ready" || isRunning} onClick={handleRunOrder}>
+              {isRunning ? <><span className="spin">⚙️</span> 파이썬 실행 중...</>
+                : isSaving ? "💾 저장 중..."
+                : "▶ 코드 저장 및 주문하기 (파이썬 실행)"}
+            </button>
+            <button id="download-btn" className="download-btn" onClick={handleDownload} title="현재 코드를 pizza.py로 내 컴퓨터에 저장합니다">
+              📥 pizza.py 저장
+            </button>
+          </div>
         </section>
 
         {/* ══════════════ 오른쪽 패널 (에디터) ══════════════ */}
